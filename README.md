@@ -36,20 +36,20 @@
 
 Follow these simple steps to play the Hangman game:
 
-1. Run the Hangman.exe executable or build and run the C# project.
-2. The game will randomly select a word, and the hangman progress will be displayed as
-3. underscores representing each letter of the word.
-4. Guess letters one at a time by entering them on the
-5. command line or in the game interface.
-6. You have a limited number of attempts (lives) before the hangman is complete.
-7. The number of attempts is usually displayed to the player.
-8. If you guess a letter that exists in the word, it will be revealed
-9. in its corresponding position(s) on the display.
-10. If you guess a letter that does not exist in the word,
-11. you will lose one attempt (life), and part of the hangman will be drawn.
-12. Continue guessing letters until you either guess the entire word correctly or run out of attempts.
-13. If you guess the word within the attempts, you win! Congratulations!
-14. If you use up all your attempts before guessing the word correctly,
-15. the hangman will be complete, and you lose the game.
+* Run the Hangman.exe executable or build and run the C# project.
+* The game will randomly select a word, and the hangman progress will be displayed as
+  underscores representing each letter of the word.
+*   Guess letters one at a time by entering them on the
+   command line or in the game interface.
+*   You have a limited number of attempts (lives) before the hangman is complete.
+*  The number of attempts is usually displayed to the player.
+*  If you guess a letter that exists in the word, it will be revealed
+     in its corresponding position(s) on the display.
+*   If you guess a letter that does not exist in the word,
+       you will lose one attempt (life), and part of the hangman will be drawn.
+*   Continue guessing letters until you either guess the entire word correctly or run out of attempts.
+*   If you guess the word within the attempts, you win! Congratulations!
+*   If you use up all your attempts before guessing the word correctly,
+    the hangman will be complete, and you lose the game.
 
 Enjoy playing Hangman in C# and have fun guessing words!
