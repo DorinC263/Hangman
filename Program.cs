@@ -1,4 +1,4 @@
-﻿namespace Hangman
+﻿namespace HangMan
 {
     internal class Program
     {
@@ -6,6 +6,7 @@
         {
             char response = 'y';
             char letterGuess;
+            string drawHangman = "";
 
             while (response == 'y')
             {
@@ -67,6 +68,30 @@
                         Console.ResetColor();
                         userTries--;
                         Console.WriteLine($"Tries : {userTries}");
+                    }
+                    if (userTries < 5)
+                    {
+                        Console.WriteLine( "--------");
+                    }
+
+                    if (userTries < 4)
+                    {
+                        Console.WriteLine("       |");
+                    }
+
+                    if (userTries < 3)
+                    {
+                        Console.WriteLine("       O");
+                    }
+
+                    if (userTries < 2)
+                    {
+                        Console.WriteLine("      /|\\ ");
+                    }
+
+                    if (userTries == 0)
+                    {
+                        Console.WriteLine("      / \\ ");
                     }
                 }
                 if (userTries == 0)
