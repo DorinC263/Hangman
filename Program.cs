@@ -63,7 +63,7 @@ namespace HangMan
                         Console.WriteLine(incorrectGuessMessage, letterGuess);
                         userTries--;
                     }
-
+                    
                     Console.ResetColor();
                     Console.WriteLine($"Tries : {userTries}");
 
