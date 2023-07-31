@@ -22,6 +22,11 @@ namespace HangMan
                 string hiddenWord = new string('_', selectedWord.Length);
                 int userTries = 6;
 
+                string correctGuessMessage = "Correct, >> {0} << is in the word\n";
+                string incorrectGuessMessage = "Sorry, >> {0} << was not in the word.\n";
+                ConsoleColor correctGuessColor = ConsoleColor.Yellow;
+                ConsoleColor incorrectGuessColor = ConsoleColor.Red;
+
                 while (hiddenWord.Contains("_") && userTries > 0)
                 {
                     Console.WriteLine("Welcome to Hangman!");
@@ -45,23 +50,22 @@ namespace HangMan
 
                     hiddenWord = updatedHiddenWord.ToString();
 
+                    Console.Clear();
+
                     if (containsLetter == true)
                     {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"Correct, >> {letterGuess} << is in the word\n");
-                        Console.ResetColor();
-                        Console.WriteLine($"Tries : {userTries}");
+                        Console.ForegroundColor = correctGuessColor;
+                        Console.WriteLine(correctGuessMessage, letterGuess);
                     }
                     else
                     {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Sorry, >> {letterGuess} << was not in the word.\n");
-                        Console.ResetColor();
+                        Console.ForegroundColor = incorrectGuessColor;
+                        Console.WriteLine(incorrectGuessMessage, letterGuess);
                         userTries--;
-                        Console.WriteLine($"Tries : {userTries}");
                     }
+
+                    Console.ResetColor();
+                    Console.WriteLine($"Tries : {userTries}");
 
                     if (userTries < 5)
                     {
@@ -99,6 +103,7 @@ namespace HangMan
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"You guessed correct. The word was {hiddenWord}");
+                    Console.ResetColor();
                 }
 
                 Console.WriteLine("Do you want to restart?");
