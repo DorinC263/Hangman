@@ -1,4 +1,8 @@
-﻿namespace HangMan
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace HangMan
 {
     internal class Program
     {
@@ -6,7 +10,6 @@
         {
             char response = 'y';
             char letterGuess;
-            string drawHangman = "";
 
             while (response == 'y')
             {
@@ -15,23 +18,9 @@
                 int randomNumber = randomGenerator.Next(0, 10);
 
                 List<string> gameAnswers = new List<string> { "computer", "paper", "printer", "light", "stapler", "window", "bomber", "airplane", "garden", "thermostat" };
-                //or i can add them like this
-                //gameAnswers.Add("Computer");
-                //gameAnswers.Add("Paper");
-                //gameAnswers.Add("Printer");
-                //gameAnswers.Add("Light");
-                //gameAnswers.Add("Stapler");
-                //gameAnswers.Add("Window");
-
                 string selectedWord = gameAnswers[randomNumber];
-                string hiddenWord = gameAnswers[randomNumber];
+                string hiddenWord = new string('_', selectedWord.Length);
                 int userTries = 6;
-
-                for (int i = 0; i < selectedWord.Length; i++)
-                {
-                    hiddenWord = hiddenWord.Remove(i, 1);
-                    hiddenWord = hiddenWord.Insert(i, "_");
-                }
 
                 while (hiddenWord.Contains("_") && userTries > 0)
                 {
@@ -43,15 +32,19 @@
                     Console.WriteLine(hiddenWord);
                     char.TryParse(Console.ReadLine().ToLower(), out letterGuess);
                     bool containsLetter = false;
+                    StringBuilder updatedHiddenWord = new StringBuilder(hiddenWord);
+
                     for (int i = 0; i < selectedWord.Length; i++)
                     {
                         if (selectedWord[i] == letterGuess)
                         {
-                            hiddenWord = hiddenWord.Remove(i, 1);
-                            hiddenWord = hiddenWord.Insert(i, letterGuess.ToString());
+                            updatedHiddenWord[i] = letterGuess;
                             containsLetter = true;
                         }
                     }
+
+                    hiddenWord = updatedHiddenWord.ToString();
+
                     if (containsLetter == true)
                     {
                         Console.Clear();
@@ -69,9 +62,10 @@
                         userTries--;
                         Console.WriteLine($"Tries : {userTries}");
                     }
+
                     if (userTries < 5)
                     {
-                        Console.WriteLine( "--------");
+                        Console.WriteLine("--------");
                     }
 
                     if (userTries < 4)
@@ -94,16 +88,19 @@
                         Console.WriteLine("      / \\ ");
                     }
                 }
+
                 if (userTries == 0)
                 {
                     Console.WriteLine("Sorry, you are out of tries !!");
                     Console.WriteLine($"The word was {selectedWord} ");
                 }
+
                 if (userTries != 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"You guessed correct. The word was {hiddenWord}");
                 }
+
                 Console.WriteLine("Do you want to restart?");
                 Console.WriteLine("Press any key to exit or \"Y\" to restart the game");
                 response = Console.ReadKey().KeyChar;
