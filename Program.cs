@@ -37,7 +37,7 @@ namespace HangMan
                     Console.WriteLine(hiddenWord);
                     char.TryParse(Console.ReadLine().ToLower(), out letterGuess);
                     bool containsLetter = false;
-                    StringBuilder updatedHiddenWord = new StringBuilder(hiddenWord);
+                    StringBuilder updatedHiddenWord = new StringBuilder(hiddenWord); 
 
                     for (int i = 0; i < selectedWord.Length; i++)
                     {
