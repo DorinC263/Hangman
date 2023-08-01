@@ -21,11 +21,6 @@ namespace HangMan
                 string hiddenWord = new string('_', selectedWord.Length);
                 int userTries = 6;
 
-                string correctGuessMessage = "Correct, >> {0} << is in the word\n";
-                string incorrectGuessMessage = "Sorry, >> {0} << was not in the word.\n";
-                ConsoleColor correctGuessColor = ConsoleColor.Yellow;
-                ConsoleColor incorrectGuessColor = ConsoleColor.Red;
-
                 while (hiddenWord.Contains("_") && userTries > 0)
                 {
                     Console.WriteLine("Welcome to Hangman!");
