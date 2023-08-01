@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Text;
 
 namespace HangMan
@@ -35,7 +34,8 @@ namespace HangMan
                     Console.WriteLine(tellLength);
                     Console.WriteLine(" Guess a letter of the hidden word : ");
                     Console.WriteLine(hiddenWord);
-                    char.TryParse(Console.ReadLine().ToLower(), out letterGuess);
+                    letterGuess = Console.ReadKey().KeyChar;
+                    letterGuess = char.ToLower(letterGuess);
                     bool containsLetter = false;
                     StringBuilder updatedHiddenWord = new StringBuilder(hiddenWord); 
 
