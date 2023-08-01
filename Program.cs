@@ -1,36 +1,45 @@
 ﻿
+using System.Text;
+
 namespace HangMan
 {
     internal class Program
     {
+        const string CORRECT_GUESS_MESSAGE = "\nCorrect, >> {0} << is in the word\n";
+        const string INCORRECT_GUESS_MESSAGE = "\nSorry, >> {0} << was not in the word.\n";
+        const ConsoleColor CORRECT_GUESS_COLOR = ConsoleColor.Green;
+        const ConsoleColor INCORRECT_GUESS_COLOR = ConsoleColor.Red;
+
         static void Main(string[] args)
         {
             char response = 'y';
             char letterGuess;
-
+            Random randomGenerator = new Random();
+            List<string> gameAnswers = new List<string> { "computer", "paper", "printer", "light", "stapler", "window", "bomber", "airplane", "garden", "thermostat" };
+        
             while (response == 'y')
             {
                 Console.WriteLine();
-                Random randomGenerator = new Random();
                 int randomNumber = randomGenerator.Next(0, 10);
 
-                List<string> gameAnswers = new List<string> { "computer", "paper", "printer", "light", "stapler", "window", "bomber", "airplane", "garden", "thermostat" };
                 string selectedWord = gameAnswers[randomNumber];
                 string hiddenWord = new string('_', selectedWord.Length);
                 int userTries = 6;
 
+                Console.WriteLine("Welcome to Hangman!");
+                Console.WriteLine($"Discover the word in {userTries} attempts by guessing the word using letters.");
+                string tellLength = "This word has: " + selectedWord.Length + " letters. Good luck!";
+                Console.WriteLine(tellLength);
+
                 while (hiddenWord.Contains("_") && userTries > 0)
                 {
-                    Console.WriteLine("Welcome to Hangman!");
-                    Console.WriteLine("Discover the word in 6 attempts by guessing the word using letters.");
-                    string tellLength = "This word has: " + selectedWord.Length + " letters. Good luck!";
-                    Console.WriteLine(tellLength);
+
                     Console.WriteLine(" Guess a letter of the hidden word : ");
                     Console.WriteLine(hiddenWord);
                     letterGuess = Console.ReadKey().KeyChar;
                     letterGuess = char.ToLower(letterGuess);
                     bool containsLetter = false;
-                    StringBuilder updatedHiddenWord = new StringBuilder(hiddenWord); 
+                    StringBuilder updatedHiddenWord = new StringBuilder(hiddenWord);
 
                     for (int i = 0; i < selectedWord.Length; i++)
                     {
@@ -44,46 +53,24 @@ namespace HangMan
                     hiddenWord = updatedHiddenWord.ToString();
 
                     Console.Clear();
+                    string guessMessage = string.Empty;
+                    ConsoleColor foreGroundColor = CORRECT_GUESS_COLOR;
 
                     if (containsLetter == true)
                     {
-                        Console.ForegroundColor = correctGuessColor;
-                        Console.WriteLine(correctGuessMessage, letterGuess);
+                        guessMessage = CORRECT_GUESS_MESSAGE;
                     }
                     else
                     {
-                        Console.ForegroundColor = incorrectGuessColor;
-                        Console.WriteLine(incorrectGuessMessage, letterGuess);
+                        foreGroundColor = INCORRECT_GUESS_COLOR;
+                        Console.WriteLine(INCORRECT_GUESS_MESSAGE, letterGuess);
                         userTries--;
                     }
-                    
+                    Console.ForegroundColor = foreGroundColor;
+                    Console.WriteLine(guessMessage, letterGuess);
                     Console.ResetColor();
                     Console.WriteLine($"Tries : {userTries}");
-
-                    if (userTries < 5)
-                    {
-                        Console.WriteLine("--------");
-                    }
-
-                    if (userTries < 4)
-                    {
-                        Console.WriteLine("       |");
-                    }
-
-                    if (userTries < 3)
-                    {
-                        Console.WriteLine("       O");
-                    }
-
-                    if (userTries < 2)
-                    {
-                        Console.WriteLine("      /|\\ ");
-                    }
-
-                    if (userTries == 0)
-                    {
-                        Console.WriteLine("      / \\ ");
-                    }
+                       
                 }
 
                 if (userTries == 0)
