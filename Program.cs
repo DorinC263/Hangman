@@ -7,8 +7,7 @@ namespace HangMan
     {
         const string CORRECT_GUESS_MESSAGE = "\nCorrect, >> {0} << is in the word\n";
         const string INCORRECT_GUESS_MESSAGE = "\nSorry, >> {0} << was not in the word.\n";
-        const ConsoleColor CORRECT_GUESS_COLOR = ConsoleColor.Green;
-        const ConsoleColor INCORRECT_GUESS_COLOR = ConsoleColor.Red;
+        const int MAX_TRIES = 6;
 
         static void Main(string[] args)
         {
@@ -17,19 +16,23 @@ namespace HangMan
             Random randomGenerator = new Random();
             List<string> gameAnswers = new List<string> { "computer", "paper", "printer", "light", "stapler", "window", "bomber", "airplane", "garden", "thermostat" };
         
+
             while (response == 'y')
             {
                 Console.WriteLine();
-                int randomNumber = randomGenerator.Next(0, 10);
+                int randomNumber = randomGenerator.Next(gameAnswers.Count);
 
                 string selectedWord = gameAnswers[randomNumber];
                 string hiddenWord = new string('_', selectedWord.Length);
-                int userTries = 6;
+                int userTries = MAX_TRIES;
 
                 Console.WriteLine("Welcome to Hangman!");
                 Console.WriteLine($"Discover the word in {userTries} attempts by guessing the word using letters.");
                 string tellLength = "This word has: " + selectedWord.Length + " letters. Good luck!";
                 Console.WriteLine(tellLength);
+
+                ConsoleColor CORRECT_GUESS_COLOR = ConsoleColor.Yellow;
+                ConsoleColor INCORRECT_GUESS_COLOR = ConsoleColor.Red;
 
                 while (hiddenWord.Contains("_") && userTries > 0)
                 {
@@ -63,7 +66,7 @@ namespace HangMan
                     else
                     {
                         foreGroundColor = INCORRECT_GUESS_COLOR;
-                        Console.WriteLine(INCORRECT_GUESS_MESSAGE, letterGuess);
+                        guessMessage = INCORRECT_GUESS_MESSAGE;
                         userTries--;
                     }
                     Console.ForegroundColor = foreGroundColor;
